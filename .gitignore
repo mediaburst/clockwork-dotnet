@@ -90,3 +90,6 @@ UpgradeLog*.XML
 
 # NuGet
 packages/
+
+# Signing Keys
+*.snk
