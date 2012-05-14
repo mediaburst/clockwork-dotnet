@@ -16,9 +16,7 @@ namespace Clockwork.Tests
 
         public APITest()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+            
         }
 
         private TestContext testContextInstance;

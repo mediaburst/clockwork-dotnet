@@ -30,7 +30,7 @@ namespace Clockwork
         /// <summary>
         /// A System.Net.WebProxy object containing your proxy server details.
         /// Only set this if you need to override your servers default proxy settings
-        /// If you don't use a proxy server just leave it blank
+        /// If you don't use a proxy server just leave it as null
         /// </summary>
         public WebProxy Proxy { get; set; }
 
@@ -83,7 +83,7 @@ namespace Clockwork
             SSL = true;
             Proxy = null;
 
-            // SMS defaults
+            // SMS defaults - Account defaults will be used if these are left as null
             From = null;
             Long = null;
             Truncate = null;

@@ -44,7 +44,7 @@ namespace Clockwork
         /// What to do if there's an invalid character in your message text
         /// Valid characters are defined in the GSM 03.38 character set
         /// </summary>
-        /// /// <remarks>
+        /// <remarks>
         /// Set this to AccountDefault to use your accounts default setting
         /// </remarks>        
         public InvalidCharacterAction InvalidCharacterAction { get; set; }
