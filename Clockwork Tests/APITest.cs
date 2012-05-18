@@ -84,8 +84,8 @@ namespace Clockwork.Tests
         public void SendNullSMS_List()
         {
             Clockwork.API api = new API(key);
-            List<SMS> list = null;
-            List<SMSResult> result = api.Send(list);
+            List<SMS> smsList = null;
+            List<SMSResult> result = api.Send(smsList);
         }
 
         [TestMethod]
@@ -122,11 +122,11 @@ namespace Clockwork.Tests
         {
             Clockwork.API api = new API(key);
 
-            List<SMS> sms = new List<SMS>();
-            sms.Add(new SMS { To = "441234567891", Message = "Hello World" });
-            sms.Add(new SMS { To = "441234567892", Message = "Hello World" });
+            List<SMS> smsList = new List<SMS>();
+            smsList.Add(new SMS { To = "441234567891", Message = "Hello World" });
+            smsList.Add(new SMS { To = "441234567892", Message = "Hello World" });
 
-            List<SMSResult> result = api.Send(sms);
+            List<SMSResult> result = api.Send(smsList);
             Assert.IsTrue(result[0].Success && result[1].Success);
         }
 
@@ -135,11 +135,11 @@ namespace Clockwork.Tests
         {
             Clockwork.API api = new API(key);
 
-            List<SMS> sms = new List<SMS>();
-            sms.Add(new SMS { To = "441234567891" });
-            sms.Add(new SMS { To = "441234567892" });
+            List<SMS> smsList = new List<SMS>();
+            smsList.Add(new SMS { To = "441234567891" });
+            smsList.Add(new SMS { To = "441234567892" });
 
-            List<SMSResult> result = api.Send(sms);
+            List<SMSResult> result = api.Send(smsList);
             Assert.IsFalse(result[0].Success || result[1].Success);
         }
 
@@ -148,11 +148,11 @@ namespace Clockwork.Tests
         {
             Clockwork.API api = new API(key);
 
-            List<SMS> sms = new List<SMS>();
-            sms.Add(new SMS { To = "441234567891", Message="Hello World" });
-            sms.Add(new SMS { To = "441234567892" });
+            List<SMS> smsList = new List<SMS>();
+            smsList.Add(new SMS { To = "441234567891", Message="Hello World" });
+            smsList.Add(new SMS { To = "441234567892" });
 
-            List<SMSResult> result = api.Send(sms);
+            List<SMSResult> result = api.Send(smsList);
             Assert.IsTrue(result[0].Success);
             Assert.IsFalse(result[1].Success);
         }
@@ -193,6 +193,19 @@ namespace Clockwork.Tests
             SMSResult result = api.Send(new SMS { To = "44123457890", Message = "Hello World" });
 
             Assert.IsTrue(result.Success);
+        }
+
+        [TestMethod]
+        public void SendOneSMS_Response_Matches_Send()
+        {
+            Clockwork.API api = new API(key);
+
+            List<SMS> smsList = new List<SMS>();
+            SMS sms = new SMS { To = "441234567891", Message = "Hello World" };
+            smsList.Add(sms);
+
+            List<SMSResult> result = api.Send(smsList);
+            Assert.AreSame(sms, result[0].SMS);
         }
 
         [TestMethod]

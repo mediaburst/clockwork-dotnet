@@ -7,17 +7,13 @@ namespace Clockwork
     public class SMSResult
     {
         /// <summary>
+        /// Original SMS object this SMSResult is for
+        /// </summary>
+        public SMS SMS { get; set; }
+        /// <summary>
         /// Clockwork Message ID
         /// </summary>
         public string ID { get; set; }
-        /// <summary>
-        /// Phone number
-        /// </summary>
-        public string To { get; set; }
-        /// <summary>
-        /// Your message ID
-        /// </summary>
-        public string ClientID { get; set; }
         /// <summary>
         /// Success status flag
         /// This will be true if your message has been sent
@@ -43,9 +39,7 @@ namespace Clockwork
         /// </summary>
         public SMSResult()
         {
-            ID = "";
-            To = "";
-            ClientID = "";
+            SMS = null;
             Success = false;
             ErrorCode = 0;
             ErrorMessage = "";

@@ -19,6 +19,7 @@ namespace Clockwork.XML
         public string Content { get; set; }
         public string From { get; set; }
         public string ClientID { get; set; }
+        public int WrapperID { get; set; }
 
         public bool? Long { get; set; }
         [XmlIgnore]

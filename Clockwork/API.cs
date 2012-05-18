@@ -11,8 +11,8 @@ namespace Clockwork
     /// </summary>
     public class API
     {
-        private const string smsUrl     = "api.clockworksms.com/xml/send";
-        private const string creditUrl  = "api.clockworksms.com/xml/credit";
+        private const string smsUrl = "api.clockworksms.com/xml/send";
+        private const string creditUrl = "api.clockworksms.com/xml/credit";
 
         /// <summary>
         /// Clockwork API Key
@@ -65,8 +65,7 @@ namespace Clockwork
         /// /// <remarks>
         /// Set this to AccountDefault to use your accounts default setting
         /// </remarks>        
-        public InvalidCharacterAction InvalidCharacterAction { get; set; }
-        
+        public InvalidCharacterAction InvalidCharacterAction { get; set; }        
 
         /// <summary>
         /// Create a new API wrapper
@@ -115,7 +114,7 @@ namespace Clockwork
             if (smsList == null || smsList.Count == 0)
                 throw new ArgumentException("SMS list can't be empty", "smsList");
 
-
+            int wrapperId = 0;
             XML.Message xmlMessage = new XML.Message { Key = Key };
             foreach (SMS sms in smsList)
             {
@@ -127,8 +126,9 @@ namespace Clockwork
                     ClientID            = sms.ClientID,
                     Long                = (sms.Long == null) ? Long : sms.Long,
                     Truncate            = (sms.Truncate == null) ? Truncate : sms.Truncate,
-                    InvalidCharAction   = (sms.InvalidCharacterAction == global::InvalidCharacterAction.AccountDefault) ? InvalidCharacterAction : sms.InvalidCharacterAction
-                });
+                    InvalidCharAction   = (sms.InvalidCharacterAction == global::InvalidCharacterAction.AccountDefault) ? InvalidCharacterAction : sms.InvalidCharacterAction,
+                    WrapperID           = wrapperId++
+                });                
             }
 
             XML.Message_Resp xmlResp = new XML.Message_Resp();
@@ -143,9 +143,8 @@ namespace Clockwork
             {
                 results.Add(new SMSResult
                 {
-                    To              = resp.To,
+                    SMS             = smsList[resp.WrapperID],
                     ID              = resp.MessageID,
-                    ClientID        = resp.ClientID,
                     ErrorCode       = resp.ErrNo ?? 0,
                     ErrorMessage    = resp.ErrDesc,
                     Success         = ((resp.ErrNo ?? 0) == 0)
@@ -173,7 +172,7 @@ namespace Clockwork
             return xmlResp.Credit;
         }
 
-        // Serialise objects to XML and POST to the Mediaburst API
+        // Serialise objects to XML and POST to the Clockwork API
         private void XmlPost<T, U>(string url, ref T send, ref U response)
         {
             if (String.IsNullOrEmpty(url.Trim()))

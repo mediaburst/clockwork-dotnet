@@ -12,5 +12,6 @@ namespace Clockwork.XML
         public int? ErrNo { get; set; }
         public string ErrDesc { get; set; }
         public string ClientID { get; set; }
+        public int WrapperID { get; set; }
     }
 }
