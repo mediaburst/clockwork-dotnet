@@ -103,6 +103,8 @@ namespace Clockwork.Tests
             Clockwork.API api = new API(key);
             SMSResult result = api.Send(new SMS { To = "441234567890", Message = "Hello World" });
             Assert.IsTrue(result.Success);
+
+            
         }
 
         [TestMethod]
@@ -115,6 +117,7 @@ namespace Clockwork.Tests
             
             List<SMSResult> result = api.Send(sms);
             Assert.IsTrue(result[0].Success);
+
         }
 
         [TestMethod]

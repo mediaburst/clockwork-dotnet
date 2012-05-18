@@ -40,6 +40,7 @@ namespace Clockwork
         public SMSResult()
         {
             SMS = null;
+            ID = null;
             Success = false;
             ErrorCode = 0;
             ErrorMessage = "";
