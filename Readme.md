@@ -32,7 +32,7 @@ Alternatively, download this project and add Clockwork.dll as a project referenc
 Prerequisites
 -------------
 * Microsoft .NET Framework 2 or higher
-* A [Clockwork] account
+* A [Clockwork][2] account
 
 
 Usage
