@@ -10,9 +10,9 @@ public enum InvalidCharacterAction
     /// </summary>
     AccountDefault = 0,
     /// <summary>
-    /// Take no action
+    /// Return an error if a Non-GSM character is found
     /// </summary>
-    None = 1,
+    Error = 1,
     /// <summary>
     /// Remove any Non-GSM character
     /// </summary>
