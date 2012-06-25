@@ -37,7 +37,7 @@ namespace Clockwork.XML
 
         // Ignore this as we wan't to serialize the integer not the enum
         [XmlIgnore]
-        public InvalidCharacterAction InvalidCharAction { get; set; }
+        public InvalidCharacterAction? InvalidCharAction { get; set; }
 
         // Integer representation of the Invalid Character Action enum
         [XmlElement("InvalidCharAction")]
@@ -49,7 +49,7 @@ namespace Clockwork.XML
         [XmlIgnore]
         public bool InvalidCharActionXmlSpecified
         {
-            get { return InvalidCharAction != InvalidCharacterAction.AccountDefault; }
+            get { return InvalidCharAction != null && InvalidCharAction != InvalidCharacterAction.AccountDefault; }
         }
     }
 }

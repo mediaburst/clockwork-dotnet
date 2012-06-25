@@ -126,7 +126,7 @@ namespace Clockwork
                     ClientID            = sms.ClientID,
                     Long                = (sms.Long == null) ? Long : sms.Long,
                     Truncate            = (sms.Truncate == null) ? Truncate : sms.Truncate,
-                    InvalidCharAction   = (sms.InvalidCharacterAction == global::InvalidCharacterAction.AccountDefault) ? InvalidCharacterAction : sms.InvalidCharacterAction,
+                    InvalidCharAction   = (sms.InvalidCharacterAction == null) ? InvalidCharacterAction : sms.InvalidCharacterAction,
                     WrapperID           = wrapperId++
                 });                
             }

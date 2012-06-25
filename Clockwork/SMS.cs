@@ -47,7 +47,7 @@ namespace Clockwork
         /// <remarks>
         /// Set this to AccountDefault to use your accounts default setting
         /// </remarks>        
-        public InvalidCharacterAction InvalidCharacterAction { get; set; }
+        public InvalidCharacterAction? InvalidCharacterAction { get; set; }
 
         /// <summary>
         /// Create a single text message
@@ -64,7 +64,7 @@ namespace Clockwork
             ClientID = null;
             Long = null;
             Truncate = null;
-            InvalidCharacterAction = global::InvalidCharacterAction.AccountDefault;
+            InvalidCharacterAction = null;
         }
     }
 }
