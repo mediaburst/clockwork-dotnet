@@ -25,7 +25,6 @@ Prerequisites
 * Microsoft .NET Framework 2 or higher
 * A [Clockwork][2] account
 
-
 Usage
 -----
 For convenience you probably want to import the Clockwork namespace in to your code file
