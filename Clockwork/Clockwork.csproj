@@ -37,12 +37,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountType.cs" />
     <Compile Include="API.cs" />
+    <Compile Include="Balance.cs" />
     <Compile Include="InvalidCharacterAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SMS.cs" />
     <Compile Include="SMSResult.cs" />
     <Compile Include="UTF8StringWriter.cs" />
+    <Compile Include="XML\Balance.cs" />
+    <Compile Include="XML\Balance_Resp.cs" />
+    <Compile Include="XML\Currency.cs" />
     <Compile Include="XML\Message_Resp.cs" />
     <Compile Include="XML\Credit.cs" />
     <Compile Include="XML\Credit_Resp.cs" />

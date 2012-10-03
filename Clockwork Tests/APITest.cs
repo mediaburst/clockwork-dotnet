@@ -218,5 +218,13 @@ namespace Clockwork.Tests
             long credit = api.CheckCredit();
             Assert.IsTrue(credit >= 0);
         }
+
+        [TestMethod]
+        public void GetBalance()
+        {
+            Clockwork.API api = new API(key);
+            Balance balance = api.GetBalance();
+            Assert.IsTrue( (balance.AccountType == AccountType.Invoice && balance.Amount <= 0) || (balance.AccountType == AccountType.PayAsYouGo && balance.Amount >= 0) );
+        }
     }
 }

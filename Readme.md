@@ -105,10 +105,19 @@ For example, if you send to invalid phone number "abc":
 
 ### Checking your credit
 
-Check how many SMS credits you currently have available, the value will be returned as a long
+Check how many SMS credits you currently have available, the value will be returned as Balance object
 
 	Clockwork.API api = new API(key);
-	long credit = api.CheckCredit();
+	Clockwork.Balance balance = api.GetBalance();
+	string bal = balance.CurrencySymbol + balance.Amount.ToString("#,0.00");
+
+The Balance object contains the following parameters:
+
+	* Amount - Cash balance available on your account or the amount spent so far this month if AccountType is Invoice
+	* CurrencySymbol - Symbol for displaying the balance
+	* CurrencyCode - ISO 4217 currency code the balance was calculated in
+	* AccountType - AccountType enum - Either PayAsYouGo or Invoice
+		
     
 ### Handling Errors
 

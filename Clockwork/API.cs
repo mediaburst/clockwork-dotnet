@@ -13,6 +13,7 @@ namespace Clockwork
     {
         private const string smsUrl = "api.clockworksms.com/xml/send";
         private const string creditUrl = "api.clockworksms.com/xml/credit";
+        private const string balanceUrl = "api.clockworksms.com/xml/balance";
 
         /// <summary>
         /// Clockwork API Key
@@ -153,12 +154,12 @@ namespace Clockwork
 
             return results;
         }
-
-
+        
         /// <summary>
         /// Check how many SMS credits are available on your account
         /// </summary>
         /// <returns>Number of SMS</returns>
+        [Obsolete("Use the GetBalance function that returns cash balance instead", false)]
         public long CheckCredit()
         {
             XML.Credit xmlReq = new XML.Credit { Key = Key };
@@ -170,6 +171,30 @@ namespace Clockwork
                 throw new APIException(xmlResp.ErrDesc, xmlResp.ErrNo ?? 0);
 
             return xmlResp.Credit;
+        }
+
+        /// <summary>
+        /// Check your current Clockwork balance
+        /// </summary>
+        /// <returns>Balance object containing current balance and currency information</returns>
+        public Balance GetBalance()
+        {
+            XML.Balance xmlReq = new XML.Balance { Key = Key };
+            XML.Balance_Resp xmlResp = new XML.Balance_Resp();
+            XmlPost<XML.Balance, XML.Balance_Resp>(balanceUrl, ref xmlReq, ref xmlResp);
+
+            // Check for general error
+            if ((xmlResp.ErrNo ?? 0) > 0)
+                throw new APIException(xmlResp.ErrDesc, xmlResp.ErrNo ?? 0);
+
+            Balance balance = new Balance
+            {
+                AccountType = xmlResp.AccountType.Equals("payg", StringComparison.InvariantCultureIgnoreCase) ? AccountType.PayAsYouGo : AccountType.Invoice,
+                Amount = xmlResp.Balance,
+                CurrencyCode = xmlResp.Currency.Code,
+                CurrencySymbol = xmlResp.Currency.Symbol
+            };
+            return balance;
         }
 
         // Serialise objects to XML and POST to the Clockwork API

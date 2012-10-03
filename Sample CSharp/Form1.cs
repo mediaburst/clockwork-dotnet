@@ -54,5 +54,39 @@ namespace Clockwork.Samples.CSharp
                 MessageBox.Show("Unknown Exception: " + ex.Message);
             }
         }
+
+        private void balanceButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                API api = new API(key.Text);
+
+                Clockwork.Balance result = api.GetBalance();
+
+                balance.Text = result.CurrencySymbol + result.Amount.ToString("#,0.00");
+            }
+            catch (APIException ex)
+            {
+                // You'll get an API exception for errors 
+                // such as wrong key
+                MessageBox.Show("API Exception: " + ex.Message);
+            }
+            catch (WebException ex)
+            {
+                // Web exceptions mean you couldn't reach the mediaburst server
+                MessageBox.Show("Web Exception: " + ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                // Argument exceptions are thrown for missing parameters,
+                // such as forgetting to set the username
+                MessageBox.Show("Argument Exception: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Something else went wrong, the error message should help
+                MessageBox.Show("Unknown Exception: " + ex.Message);
+            }
+        }
     }
 }

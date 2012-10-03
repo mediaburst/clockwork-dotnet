@@ -35,6 +35,9 @@
             this.message = new System.Windows.Forms.TextBox();
             this.messageLabel = new System.Windows.Forms.Label();
             this.sendMessage = new System.Windows.Forms.Button();
+            this.balance = new System.Windows.Forms.TextBox();
+            this.balanceLabel = new System.Windows.Forms.Label();
+            this.balanceButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // keyLabel
@@ -96,11 +99,41 @@
             this.sendMessage.UseVisualStyleBackColor = true;
             this.sendMessage.Click += new System.EventHandler(this.sendMessage_Click);
             // 
+            // balance
+            // 
+            this.balance.Enabled = false;
+            this.balance.Location = new System.Drawing.Point(70, 229);
+            this.balance.Name = "balance";
+            this.balance.Size = new System.Drawing.Size(93, 20);
+            this.balance.TabIndex = 8;
+            // 
+            // balanceLabel
+            // 
+            this.balanceLabel.AutoSize = true;
+            this.balanceLabel.Location = new System.Drawing.Point(14, 232);
+            this.balanceLabel.Name = "balanceLabel";
+            this.balanceLabel.Size = new System.Drawing.Size(46, 13);
+            this.balanceLabel.TabIndex = 7;
+            this.balanceLabel.Text = "Balance";
+            // 
+            // balanceButton
+            // 
+            this.balanceButton.Location = new System.Drawing.Point(169, 227);
+            this.balanceButton.Name = "balanceButton";
+            this.balanceButton.Size = new System.Drawing.Size(103, 23);
+            this.balanceButton.TabIndex = 9;
+            this.balanceButton.Text = "Get Balance";
+            this.balanceButton.UseVisualStyleBackColor = true;
+            this.balanceButton.Click += new System.EventHandler(this.balanceButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.balanceButton);
+            this.Controls.Add(this.balance);
+            this.Controls.Add(this.balanceLabel);
             this.Controls.Add(this.sendMessage);
             this.Controls.Add(this.message);
             this.Controls.Add(this.messageLabel);
@@ -124,6 +157,9 @@
         private System.Windows.Forms.TextBox message;
         private System.Windows.Forms.Label messageLabel;
         private System.Windows.Forms.Button sendMessage;
+        private System.Windows.Forms.TextBox balance;
+        private System.Windows.Forms.Label balanceLabel;
+        private System.Windows.Forms.Button balanceButton;
     }
 }
 
