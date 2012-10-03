@@ -1,14 +1,5 @@
-IMPORTANT
----------
-
-Don't use this wrapper yet, it will not work until after the next mediaburst SMS API release.
-
-This readme will be updated once that release has happened.
-
-
 Clockwork SMS API Wrapper for .NET
 ==================================
-
 This wrapper lets you interact with Clockwork without the hassle of having to create any XML or make HTTP calls.
 
 It's compiled as a .NET 2 library so should work with version 2 or above.
