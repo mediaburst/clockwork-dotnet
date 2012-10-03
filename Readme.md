@@ -96,7 +96,7 @@ For example, if you send to invalid phone number "abc":
 
 ### Checking your credit
 
-Check how many SMS credits you currently have available, the value will be returned as Balance object
+Check how much SMS credit you currently have available, the value will be returned as Balance object
 
 	Clockwork.API api = new API(key);
 	Clockwork.Balance balance = api.GetBalance();
