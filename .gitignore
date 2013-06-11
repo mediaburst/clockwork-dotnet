@@ -93,3 +93,6 @@ packages/
 
 # Signing Keys
 *.snk
+
+# Include the release version of main Clockwork library to save people the hassle of having to compile it themselves.
+!Clockwork/bin/Release/Clockwork.dll
