@@ -30,38 +30,46 @@ Usage
 -----
 For convenience you probably want to import the Clockwork namespace in to your code file
 
-	using Clockwork;
+```csharp
+using Clockwork;
+```
 
 ### Sending a message
-	
-	Clockwork.API api = new API(key);
-	SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello World" } );   
+
+```csharp	
+Clockwork.API api = new API(key);
+SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello World" } );   
+```
 
 ### Sending multiple messages
 
 We recomment you use batch sizes of 500 messages or fewer. By limiting the batch size it prevents any timeouts when sending.
 
-	Clockwork.API api = new API(key);
-	List<SMS> smsList = new List<SMS>();
-	smsList.Add(new SMS { To = "441234567891", Message = "Hello Bill" });
-	smsList.Add(new SMS { To = "441234567892", Message = "Hello Ben" });
-	List<SMSResult> results = api.Send(smsList);
+```csharp
+Clockwork.API api = new API(key);
+List<SMS> smsList = new List<SMS>();
+smsList.Add(new SMS { To = "441234567891", Message = "Hello Bill" });
+smsList.Add(new SMS { To = "441234567892", Message = "Hello Ben" });
+List<SMSResult> results = api.Send(smsList);
+```
 
 ### Handling the resposne
 
 The responses come back in SMSResult objects, these contain the unique Clockwork Message ID, whether the message worked, and the original SMS so you can update your database.
 
-	Clockwork.API api = new API(key);
-	SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello World" } );   
+```csharp
+Clockwork.API api = new API(key);
+SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello World" } );   
 
-	if(result.Success) 
-	{
-		Console.WriteLine("SMS Sent to {0}, Clockwork ID: {1}", result.SMS.To, result.ID);
-	}
-	else
-	{
-		Console.WriteLine("SMS to {0} failed, Clockwork Error: {1} {2}", result.SMS.To, result.ErrorCode, result.ErrorMessage);
-	}
+if(result.Success) 
+{
+	Console.WriteLine("SMS Sent to {0}, Clockwork ID: {1}", result.SMS.To, result.ID);
+}
+else
+{
+	Console.WriteLine("SMS to {0} failed, Clockwork Error: {1} {2}", result.SMS.To, result.ErrorCode, result.ErrorMessage);
+}
+```
 
 If you send multiple SMS messages in a single send, you'll get back a List of SMSResult objects, one per SMS object.
 
@@ -98,16 +106,18 @@ For example, if you send to invalid phone number "abc":
 
 Check how much SMS credit you currently have available, the value will be returned as Balance object
 
-	Clockwork.API api = new API(key);
-	Clockwork.Balance balance = api.GetBalance();
-	string bal = balance.CurrencySymbol + balance.Amount.ToString("#,0.00");
+```csharp
+Clockwork.API api = new API(key);
+Clockwork.Balance balance = api.GetBalance();
+string bal = balance.CurrencySymbol + balance.Amount.ToString("#,0.00");
+```
 
 The Balance object contains the following parameters:
 
-	* Amount - Cash balance available on your account or the amount spent so far this month if AccountType is Invoice
-	* CurrencySymbol - Symbol for displaying the balance
-	* CurrencyCode - ISO 4217 currency code the balance was calculated in
-	* AccountType - AccountType enum - Either PayAsYouGo or Invoice
+* Amount - Cash balance available on your account or the amount spent so far this month if AccountType is Invoice
+* CurrencySymbol - Symbol for displaying the balance
+* CurrencyCode - ISO 4217 currency code the balance was calculated in
+* AccountType - AccountType enum - Either PayAsYouGo or Invoice
 		
     
 ### Handling Errors
@@ -116,39 +126,38 @@ The Clockwork wrapper will throw exceptions if the entire call failed.
 
 Exceptions of the following types are expected:
 
-	* APIException (Clockwork.APIException)
-	
-	* WebException (System.Net.WebException)
-	
-	* ArgumentException (System.ArgumentException)
+* APIException (Clockwork.APIException)
+* WebException (System.Net.WebException)
+* ArgumentException (System.ArgumentException)
 
 For example sending the wrong API Key will throw an APIException whereas, trying to send without an internet connection would throw a WebException.
 
 A basic structure for Exception handling would look like this:
 
-	try
-	{
-		Clockwork.API api = new API(not_your_key);
-		SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello World" } );   
-		// Process the result here
-	}
-	catch (APIException ex)
-	{
-		// You'll get an API exception for errors such as wrong API Key
-	}
-	catch (WebException ex)
-	{
-		// Web exceptions mean you couldn't reach the Clockwork server
-	}
-	catch (ArgumentException ex)
-	{
-		// Argument exceptions are thrown for missing parameters, such as forgetting to set the API Key
-	}
-	catch (Exception ex)
-	{
-		// Something else went wrong, the error message should help here
-	}
-
+```csharp
+try
+{
+	Clockwork.API api = new API(not_your_key);
+	SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello World" } );   
+	// Process the result here
+}
+catch (APIException ex)
+{
+	// You'll get an API exception for errors such as wrong API Key
+}
+catch (WebException ex)
+{
+	// Web exceptions mean you couldn't reach the Clockwork server
+}
+catch (ArgumentException ex)
+{
+	// Argument exceptions are thrown for missing parameters, such as forgetting to set the API Key
+}
+catch (Exception ex)
+{
+	// Something else went wrong, the error message should help here
+}
+```
 
 Advanced Usage
 --------------
@@ -168,13 +177,13 @@ This class has a few additional features that some users may find useful, if the
 
     Truncate the message payload if it is too long, if this is set to false, the message will fail if it is too long.
 
-*	InvalidCharacterAction [enum]
+*   InvalidCharacterAction [enum]
 
-	What to do if the message contains an invalid character. Possible values are
-	* AccountDefault - Use the setting from your Clockwork account
-	* None			 - Fail the message
-	* Remove		 - Remove the invalid characters then send
-	* Replace		 - Replace some common invalid characters such as replacing curved quotes with straight quotes
+    What to do if the message contains an invalid character. Possible values are
+    * AccountDefault - Use the setting from your Clockwork account
+    * None			 - Fail the message
+    * Remove		 - Remove the invalid characters then send
+    * Replace		 - Replace some common invalid characters such as replacing curved quotes with straight quotes
 
 ### Setting Options
 
@@ -183,37 +192,42 @@ Options set on the API object will apply to all SMS messages unless specifically
 
 In this example both message will be sent from Clockwork
 
-	Clockwork.API api = new API(key);
-	api.From = "Clockwork";
-	List<SMS> smsList = new List<SMS>();
-	smsList.Add(new SMS { To = "441234567891", Message = "Hello Bill" });
-	smsList.Add(new SMS { To = "441234567892", Message = "Hello Ben" });
-	List<SMSResult> results = api.Send(smsList); 
+```csharp
+Clockwork.API api = new API(key);
+api.From = "Clockwork";
+List<SMS> smsList = new List<SMS>();
+smsList.Add(new SMS { To = "441234567891", Message = "Hello Bill" });
+smsList.Add(new SMS { To = "441234567892", Message = "Hello Ben" });
+List<SMSResult> results = api.Send(smsList); 
+```
 
 #### Per-message Optons
 Set option values individually on each message
 
 In this example, one message will be from Clockwork and the other from 84433
 
-	Clockwork.API api = new API(key);
-	List<SMS> smsList = new List<SMS>();
-	smsList.Add(new SMS { To = "441234567891", Message = "Hello Bill", From="Clockwork" });
-	smsList.Add(new SMS { To = "441234567892", Message = "Hello Ben", From="84433" });
-	List<SMSResult> results = api.Send(smsList);
+```csharp
+Clockwork.API api = new API(key);
+List<SMS> smsList = new List<SMS>();
+smsList.Add(new SMS { To = "441234567891", Message = "Hello Bill", From="Clockwork" });
+smsList.Add(new SMS { To = "441234567892", Message = "Hello Ben", From="84433" });
+List<SMSResult> results = api.Send(smsList);
+```
 
 ### Proxy Server Support
 If you need to override the system proxy settings you can optionally pass a System.Net.WebProxy object to the SMS class.  
 See [WebProxy on MSDN][3] for full details.
 
-	// Create the Clockwork API object as normal
-	Clockwork.API api = new API(key);
+```csharp
+// Create the Clockwork API object as normal
+Clockwork.API api = new API(key);
 
-	// Set your proxy settings
-	api.Proxy = new System.Net.WebProxy(proxyHost, proxyPort);
+// Set your proxy settings
+api.Proxy = new System.Net.WebProxy(proxyHost, proxyPort);
 
-	// Send the message
-	SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello World" } );  
-		 
+// Send the message
+SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello World" } );  
+```		 
 
 License
 -------
