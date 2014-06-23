@@ -245,4 +245,4 @@ and submit a pull request.
 
 [1]: https://nuget.org/packages/Clockwork/
 [2]: http://www.clockworksms.com/
-[3]: http://msdn.microsoft.com/en-us/library/system.net.webproxy.aspx	"MSDN"
+[3]: http://msdn.microsoft.com/en-us/library/system.net.webproxy.aspx
