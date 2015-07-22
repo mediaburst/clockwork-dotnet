@@ -231,7 +231,7 @@ SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello Wor
 
 License
 -------
-This project is licensed under the ISC open-source license.
+This project is licensed under the MIT open-source license.
 
 A copy of this license can be found in License.txt.
 

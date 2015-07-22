@@ -23,17 +23,11 @@ namespace Clockwork.XML
 
         public bool? Long { get; set; }
         [XmlIgnore]
-        public bool LongSpecified 
-        {
-            get { return Long != null; }
-        } 
+        public bool LongSpecified => Long != null;
 
         public bool? Truncate { get; set; }
         [XmlIgnore]
-        public bool TruncateSpecified 
-        {
-            get { return Truncate != null; }
-        }
+        public bool TruncateSpecified => Truncate != null;
 
         // Ignore this as we wan't to serialize the integer not the enum
         [XmlIgnore]
