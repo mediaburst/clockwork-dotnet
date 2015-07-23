@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Xml.Serialization;
 #if PCL
 using System.Net.Http;
-using System.Net.Http.Headers;
+using System.Linq;
 #endif
-using System.Xml.Serialization;
 
 namespace Clockwork
 {
@@ -217,28 +217,36 @@ namespace Clockwork
 
 
 #if PCL
-            var clientHandler = new HttpClientHandler
+            try
             {
-                Proxy = Proxy,
-                UseProxy = Proxy != null,
-                UseCookies = false
-            };
-            using (var client = new HttpClient(clientHandler))
-            {
-                client.BaseAddress = new Uri((SSL ? "https://" : "http://") + BaseUrl);
-                client.DefaultRequestHeaders.Accept.Clear();
-                var result = client.PostAsync(SmsUrl, new StringContent(req, Encoding.UTF8)).Result;
-                if (result.IsSuccessStatusCode)
+                var clientHandler = new HttpClientHandler
                 {
-                    var responseStream = result.Content.ReadAsStreamAsync().Result;
+                    Proxy = Proxy,
+                    UseProxy = Proxy != null,
+                    UseCookies = false
+                };
+                using (var client = new HttpClient(clientHandler))
+                {
+                    client.BaseAddress = new Uri((SSL ? "https://" : "http://") + BaseUrl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    var result = client.PostAsync(url, new StringContent(req, Encoding.UTF8)).Result;
+                    result.EnsureSuccessStatusCode();
+                    {
+                        var responseStream = result.Content.ReadAsStreamAsync().Result;
 
-                    var deserializer = new XmlSerializer(typeof(TR));
-                    if (responseStream == null)
-                        throw new WebException("Blank response");
-                    response = (TR)deserializer.Deserialize(responseStream);
+                        var deserializer = new XmlSerializer(typeof(TR));
+                        if (responseStream == null)
+                            throw new WebException("Blank response");
+                        response = (TR)deserializer.Deserialize(responseStream);
+                    }
+
                 }
-
             }
+            catch (AggregateException exception)
+            {
+                throw exception.Flatten().InnerExceptions.FirstOrDefault();
+            }
+            
             
 #else
             if (SSL)
