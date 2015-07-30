@@ -172,6 +172,7 @@ namespace Clockwork.Tests
             Assert.AreEqual(10, result.ErrorCode);
         }
 
+#if PCL
         [TestMethod()]
         public void SendOneSMS_UseProxy()
         {
@@ -197,7 +198,7 @@ namespace Clockwork.Tests
 
             Assert.IsTrue(result.Success);
         }
-
+#endif
         [TestMethod]
         public void SendOneSMS_Response_Matches_Send()
         {

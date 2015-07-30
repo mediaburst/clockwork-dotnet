@@ -98,3 +98,5 @@ packages/
 !Clockwork/bin
 !Clockwork/bin/Release
 !Clockwork/bin/Release/Clockwork.dll
+
+*.nupgk

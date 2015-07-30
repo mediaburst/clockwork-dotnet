@@ -2,7 +2,7 @@ Clockwork SMS API Wrapper for .NET
 ==================================
 This wrapper lets you interact with Clockwork without the hassle of having to create any XML or make HTTP calls.
 
-It's compiled as a .NET 2 library so should work with version 2 or above.
+We support .NET 2 and above, including Windows Phone and Windows 8/8.1 universal apps.
 
 The examples below are for C#, you can find a sample VB.NET app in the Sample VB folder.
 
@@ -17,7 +17,7 @@ Installation
 ------------
 We've packaged Clockwork as a [NuGet package][1], simply search for Clockwork in the NuGet package manager.
 
-Alternatively, download this project and add Clockwork.dll as a project reference in Visual Studio.
+Alternatively, you can download this source and build it yourself. You will however need Visual Studio 2015 as we use a few C#6 features only found in in the new Roslyn compiler.
 
 
 Prerequisites
@@ -201,7 +201,7 @@ smsList.Add(new SMS { To = "441234567892", Message = "Hello Ben" });
 List<SMSResult> results = api.Send(smsList); 
 ```
 
-#### Per-message Optons
+#### Per-message Options
 Set option values individually on each message
 
 In this example, one message will be from Clockwork and the other from 84433
@@ -231,7 +231,7 @@ SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello Wor
 
 License
 -------
-This project is licensed under the ISC open-source license.
+This project is licensed under the MIT open-source license.
 
 A copy of this license can be found in License.txt.
 

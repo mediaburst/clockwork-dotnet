@@ -9,7 +9,6 @@ namespace Clockwork
     /// An additional ErrorCode parameter is added to the Exception object so you can lookup 
     /// the error in the Clockwork documentation
     /// </remarks>
-    [Serializable]
     public class APIException : Exception
     {
         public int ErrorCode { get; private set; }

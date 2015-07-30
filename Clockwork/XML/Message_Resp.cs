@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace Clockwork.XML
@@ -18,6 +20,6 @@ namespace Clockwork.XML
         public string ErrDesc { get; set; }
 
         [XmlElement("SMS_Resp")]
-        public List<SMS_Resp> SMS_Resp { get; set; } 
+        public List<SMS_Resp> SMS_Resp { get; set; }
     }
 }
