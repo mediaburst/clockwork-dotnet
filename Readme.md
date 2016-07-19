@@ -8,8 +8,7 @@ The examples below are for C#, you can find a sample VB.NET app in the Sample VB
 
 What's Clockwork?
 -----------------
-The mediaburst SMS API is being re-branded as Clockwork. At the same time we'll be launching some exciting new features
-and these shiny new wrappers.
+Clockwork is the SMS API from [Mediaburst][4].  It was previously called the Mediaburst SMS API, but we've re-branded it Clockwork
 
 The terms Clockwork and "mediaburst SMS API" refer to exactly the same thing.
 
@@ -37,7 +36,7 @@ using Clockwork;
 ### Sending a message
 
 ```csharp	
-Clockwork.API api = new API(key);
+Clockwork.API api = new API(key); //Be careful not to post API Keys to public repositories
 SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello World" } );   
 ```
 
@@ -46,7 +45,7 @@ SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello Wor
 We recomment you use batch sizes of 500 messages or fewer. By limiting the batch size it prevents any timeouts when sending.
 
 ```csharp
-Clockwork.API api = new API(key);
+Clockwork.API api = new API(key); //Be careful not to post API Keys to public repositories
 List<SMS> smsList = new List<SMS>();
 smsList.Add(new SMS { To = "441234567891", Message = "Hello Bill" });
 smsList.Add(new SMS { To = "441234567892", Message = "Hello Ben" });
@@ -58,7 +57,7 @@ List<SMSResult> results = api.Send(smsList);
 The responses come back in SMSResult objects, these contain the unique Clockwork Message ID, whether the message worked, and the original SMS so you can update your database.
 
 ```csharp
-Clockwork.API api = new API(key);
+Clockwork.API api = new API(key); //Be careful not to post API Keys to public repositories
 SMSResult result = api.Send( new SMS { To = "441234567890", Message = "Hello World" } );   
 
 if(result.Success) 
@@ -107,7 +106,7 @@ For example, if you send to invalid phone number "abc":
 Check how much SMS credit you currently have available, the value will be returned as Balance object
 
 ```csharp
-Clockwork.API api = new API(key);
+Clockwork.API api = new API(key); //Be careful not to post API Keys to public repositories
 Clockwork.Balance balance = api.GetBalance();
 string bal = balance.CurrencySymbol + balance.Amount.ToString("#,0.00");
 ```
@@ -193,7 +192,7 @@ Options set on the API object will apply to all SMS messages unless specifically
 In this example both message will be sent from Clockwork
 
 ```csharp
-Clockwork.API api = new API(key);
+Clockwork.API api = new API(key); //Be careful not to post API Keys to public repositories
 api.From = "Clockwork";
 List<SMS> smsList = new List<SMS>();
 smsList.Add(new SMS { To = "441234567891", Message = "Hello Bill" });
@@ -207,7 +206,7 @@ Set option values individually on each message
 In this example, one message will be from Clockwork and the other from 84433
 
 ```csharp
-Clockwork.API api = new API(key);
+Clockwork.API api = new API(key); //Be careful not to post API Keys to public repositories
 List<SMS> smsList = new List<SMS>();
 smsList.Add(new SMS { To = "441234567891", Message = "Hello Bill", From="Clockwork" });
 smsList.Add(new SMS { To = "441234567892", Message = "Hello Ben", From="84433" });
@@ -244,5 +243,6 @@ If you would like to contribute a bug fix or improvement please fork the project
 and submit a pull request.
 
 [1]: https://nuget.org/packages/Clockwork/
-[2]: http://www.clockworksms.com/
+[2]: https://www.clockworksms.com/
 [3]: http://msdn.microsoft.com/en-us/library/system.net.webproxy.aspx
+[4]: https://www.mediaburst.co.uk/
