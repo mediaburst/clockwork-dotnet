@@ -52,7 +52,7 @@ smsList.Add(new SMS { To = "441234567892", Message = "Hello Ben" });
 List<SMSResult> results = api.Send(smsList);
 ```
 
-### Handling the resposne
+### Handling the response
 
 The responses come back in SMSResult objects, these contain the unique Clockwork Message ID, whether the message worked, and the original SMS so you can update your database.
 
